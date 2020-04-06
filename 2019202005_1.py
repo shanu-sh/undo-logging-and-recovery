@@ -4,7 +4,7 @@ f=open('input.txt','r')
 l=f.readlines()
 f.close()
 
-x=3
+x=7
 t_count=0
 data=[]
 res=[]
@@ -64,11 +64,17 @@ def do_ops(transaction,t):
 		printme()
 
 	if("OUTPUT" in t):
+		print(t)
+		i=t.split("(")[1].strip(")")
+		print(i)
+		log.append("<COMMIT "+transaction+">")
+		temp=inmemvardict[i]
+		vardict[i]=temp
 
-		# i,j =(t.split("(")[1]).split(",")
-		# j=j.strip(')')
-
-		pass
+		for i in inmemvardict:
+			vardict[i]=inmemvardict[i]
+		print(temp)
+		printme()
 
 	if("+" in t):
 		print('additon operation',t)
@@ -188,3 +194,8 @@ while i<tot:
 print('Log printing ')
 for i in log:
 	print(i)
+
+f=open('log.txt','w')
+for i in log:
+	f.write(i+"\n")
+f.close()
